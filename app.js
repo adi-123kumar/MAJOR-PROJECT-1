@@ -2,8 +2,8 @@ const express = require("express")
 const mongoose = require("mongoose")
 const Listing = require("./models/listing")
 const Review = require("./models/review")
-const listings = require("./routes/listing.js")
-const reviews =require("./routes/review.js")
+const listingRouter = require("./routes/listing.js")
+const reviewRouter =require("./routes/review.js")
 const path = require("path")
 const { truncate } = require("fs")
 const { resolve6 } = require("dns")
@@ -21,7 +21,7 @@ const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
 const User = require("./models/user.js")
-
+const userRouter = require("./routes/user.js")
 // it is use to make templates
 app.engine("ejs", ejsMate)
 
@@ -94,10 +94,10 @@ main().then(() => {
 
 
 // using listings route here
-app.use("/listings",listings);
+app.use("/listings",listingRouter);
 // using review route here
-app.use("/listings/:id/reviews",reviews);
-
+app.use("/listings/:id/reviews",reviewRouter);
+app.use("/",userRouter)
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "page not found"))

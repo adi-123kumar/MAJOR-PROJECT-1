@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const Review = require("./review")
-
+const User = require("./user")
 const listingSchema = Schema({
     title:{
         type:String,
@@ -9,9 +9,9 @@ const listingSchema = Schema({
     },
     description:String,
     image:{
-        type:String,
-        default:"https://media.istockphoto.com/id/157579910/photo/the-beach.jpg?s=2048x2048&w=is&k=20&c=ZUR-RzIYa6Cz5dcHzXED49D_evIPbJElchb5QhQQ7aM=",
-        set:(v)=> v===""?"https://media.istockphoto.com/id/157579910/photo/the-beach.jpg?s=2048x2048&w=is&k=20&c=ZUR-RzIYa6Cz5dcHzXED49D_evIPbJElchb5QhQQ7aM=":v
+        url:String,
+        filename:String
+        
     },
     price:Number,
     location:String,
@@ -21,7 +21,11 @@ const listingSchema = Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"Review"
         }
-    ]
+    ],
+    owner:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+    }
 })
 // removing all the reviews after deletion on the a particular listing from the review collection
 listingSchema.post("findOneAndDelete",async(listing)=>{

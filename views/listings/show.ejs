@@ -1,4 +1,9 @@
 <% layout("/layouts/boilerplate")%>
+<style>
+.listing-card p {
+    margin-bottom: 5px !important; /* Reduce space between elements */
+}
+</style>
     <div class="row mt-3">
         <div class="col-8 offset-3">
 
@@ -20,23 +25,22 @@
                 <% if(listing.price){ %>
                     <p> &#8377;<%=listing.price.toLocaleString("en-IN") %></p>
                     <%} %>
-                        <p>
-                            <%=listing.location %>
-                        </p>
-                        <p>
-                            <%=listing.country %><br>
-                        </p>
-                    //removig the para ++++++++++++++++++++++++++++++++++
+
+                     <p class="mb-1">
+                 <%=listing.location %>, <%=listing.country %>
+                  </p>
+
             </div>
         </div>
-        <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
-            <div class="btns">
-                <a href="/listings/<%=listing._id  %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
-                <form action="/listings/<%=listing._id  %>?_method=DELETE" method="POST">
-                    <button class="btn btn-dark offset-4">Delete</button>
-                </form>
-            </div>
-            <% } %>
+  <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
+    <div class="d-flex align-items-center gap-2 mt-2">
+        <a href="/listings/<%=listing._id  %>/edit" class="btn btn-dark edit-btn">Edit</a>
+        <form action="/listings/<%=listing._id  %>?_method=DELETE" method="POST">
+            <button class="btn btn-dark">Delete</button>
+        </form>
+    </div>
+<% } %>
+
 
                 <!-- creating a review form  -->
 

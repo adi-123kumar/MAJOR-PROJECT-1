@@ -7,28 +7,7 @@
             </h2>
         </div>
 
-        <!-- <div class="card col-6 offset-3 show-card listing-card">
-            <img src="<%=listing.image.url%>" class="card-img-top show-img imge" alt="listing_image">
-            <div class="card-body">
-                <p class="card-text">
-                <p><b>Owned by: </b><i>
-                        <%= listing.owner.username %>
-                    </i></p>
-                <p>
-                    <%=listing.description %>
-                </p>
-                <% if(listing.price){ %>
-                    <p> &#8377;<%=listing.price.toLocaleString("en-IN") %></p>
-                    <%} %>
-                        <p>
-                            <%=listing.location %>
-                        </p>
-                        <p>
-                            <%=listing.country %><br>
-                        </p>
-                        </p>
-            </div>
-        </div> -->
+   
 
 
         <div class="image-box col-6 offset-3 ">
@@ -37,39 +16,27 @@
         <div class="maincontainer col-6 offset-3 ">
            
             <!-- after image content -->
-            <p><b>Owned by: </b><i>
-                <%= listing.owner.username %>
-            </i></p>
+            <p>
+                <b>Owned By: </b> <br>
+                <i> <%= listing.owner.username %> </i>
+            </p>
         <p>
+            <b>Description: </b> <br>
             <%=listing.description %>
         </p>
         <% if(listing.price){ %>
+            <b>Price: </b>
             <p> &#8377;<%=listing.price.toLocaleString("en-IN") %></p>
             <%} %>
                 <p>
+                   <b>City: </b> <br>
                     <%=listing.location %>
                 </p>
                 <p>
+                   <b>Country:</b>
                     <%=listing.country %><br>
                 </p>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -78,7 +45,7 @@
             <div class="btns">
                 <a href="/listings/<%=listing._id  %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
                 <form action="/listings/<%=listing._id  %>?_method=DELETE" method="POST">
-                    <button class="btn btn-dark offset-4">Delete</button>
+                    <button class="btn btn-dark offset-3 delete-btn">Delete</button>
                 </form>
             </div>
             <% } %>
@@ -151,7 +118,9 @@
                                         <form
                                             action="/listings/<%=listing._id  %>/reviews/<%=review._id  %>?_method=DELETE"
                                             class="mb-3" method="post">
+                                            <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
                                             <button class="btn btn-sm btn-dark">Delete</button>
+                                            <% } %>
                                         </form>
                                     </div>
                                     <% } %>

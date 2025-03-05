@@ -13,20 +13,11 @@
                 <p id="price"><i class="fa-solid fa-tag"></i>&nbsp;&nbsp;&#8377;<%=listing.price.toLocaleString("en-IN") %></p>
                 <p id="mobileNo"><i class="fa-solid fa-phone"></i> &nbsp;+91 9142756328 </p>
             </div>
+          <hr id="after-main-box">
         </div>
-        <hr id="after-main-box">
+        
 
         <!-- Review related things -->
-
-
-        <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
-            <div class="btns">
-                <a href="/listings/<%=listing._id  %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
-                <form action="/listings/<%=listing._id  %>?_method=DELETE" method="POST">
-                    <button class="btn btn-dark offset-3 delete-btn">Delete</button>
-                </form>
-            </div>
-            <% } %>
 
                 <!-- creating a review form  -->
 

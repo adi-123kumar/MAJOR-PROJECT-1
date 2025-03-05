@@ -41,17 +41,17 @@ app.set("views", path.join(__dirname, "views"))
 app.use(express.static(path.join(__dirname, "public")))
 
 // creating the connection with the database
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust"
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust"
 
-const dbUrl = process.env.ATLASDB_ULR;
+// const dbUrl = process.env.ATLASDB_ULR;
 // connnecting to mongoose atlas
-async function main() {
-  await mongoose.connect(dbUrl)
-}
-
 // async function main() {
-//   await mongoose.connect(MONGO_URL)
+//   await mongoose.connect(dbUrl)
 // }
+
+async function main() {
+  await mongoose.connect(MONGO_URL)
+}
 
 main().then(() => {
   console.log("connection successfull with database")
@@ -61,7 +61,7 @@ main().then(() => {
   })
 
   const store = MongoStore.create({
-    mongoUrl:dbUrl,   // changing the dburl to MONGO_URL.
+    mongoUrl:MONGO_URL,   // changing the dburl to MONGOURL
     crypto:{
       secret:process.env.SECRET,
 

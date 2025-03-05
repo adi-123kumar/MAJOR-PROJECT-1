@@ -59,6 +59,7 @@ body{
 }
 
 /* cards  */
+<<<<<<< HEAD
 
 
 .btns{
@@ -141,3 +142,29 @@ margin-bottom: 50px;
     border:2px solid black;
     border-radius: 3px;
 }
+=======
+
+.image-box{
+    width: 20vw;  
+    height: 60vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+   
+}
+.image-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    border-radius: 15px;
+}
+
+.btns{
+    display: flex;
+}
+.delete{
+    
+}
+>>>>>>> 18b7d9792df790538494a4dddee1a7b3d1aa070c

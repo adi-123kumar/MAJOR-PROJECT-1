@@ -49,9 +49,18 @@ const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust"
 //   await mongoose.connect(dbUrl)
 // }
 
+<<<<<<< HEAD
+=======
+const dbUrl = process.env.ATLASDB_ULR;
+// connnecting to mongoose atlas
+>>>>>>> 18b7d9792df790538494a4dddee1a7b3d1aa070c
 async function main() {
   await mongoose.connect(MONGO_URL)
 }
+
+// async function main() {
+//   await mongoose.connect(MONGO_URL)
+// }
 
 main().then(() => {
   console.log("connection successfull with database")
@@ -61,7 +70,11 @@ main().then(() => {
   })
 
   const store = MongoStore.create({
+<<<<<<< HEAD
     mongoUrl:MONGO_URL,   // changing the dburl to MONGOURL
+=======
+    mongoUrl:dbUrl,   // changing the dburl to MONGO_URL.
+>>>>>>> 18b7d9792df790538494a4dddee1a7b3d1aa070c
     crypto:{
       secret:process.env.SECRET,
 

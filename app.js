@@ -50,16 +50,12 @@ async function main() {
 }
 
 
-
-// const dbUrl = process.env.ATLASDB_ULR;
 // connnecting to mongoose atlas
-async function main() {
-  await mongoose.connect(MONGO_URL)
-}
-
 // async function main() {
 //   await mongoose.connect(MONGO_URL)
 // }
+
+
 
 main().then(() => {
   console.log("connection successfull with database")
@@ -69,8 +65,7 @@ main().then(() => {
   })
 
   const store = MongoStore.create({
-
-    mongoUrl:dburl,   // changing the dburl to MONGOURL
+    mongoUrl:dbUrl,   // changing the dburl to MONGO_URL.
     crypto:{
       secret:process.env.SECRET,
 

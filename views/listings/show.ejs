@@ -1,7 +1,5 @@
 <% layout("/layouts/boilerplate")%>
 
-
-<<<<<<< HEAD
         <div class="main-box">
             <div class="left-box">
                 <img src="<%=listing.image.url%>" alt="" id="listing-img">
@@ -19,40 +17,6 @@
         <hr id="after-main-box">
 
         <!-- Review related things -->
-=======
-   
-
-
-        <div class="image-box col-6 offset-3 ">
-            <img src="<%=listing.image.url%>" alt="">
-        </div>
-        <div class="maincontainer col-6 offset-3 ">
-           
-            <!-- after image content -->
-            <p>
-                <b>Owned By: </b> <br>
-                <i> <%= listing.owner.username %> </i>
-            </p>
-        <p>
-            <b>Description: </b> <br>
-            <%=listing.description %>
-        </p>
-        <% if(listing.price){ %>
-            <b>Price: </b>
-            <p> &#8377;<%=listing.price.toLocaleString("en-IN") %></p>
-            <%} %>
-                <p>
-                   <b>City: </b> <br>
-                    <%=listing.location %>
-                </p>
-                <p>
-                   <b>Country:</b>
-                    <%=listing.country %><br>
-                </p>
-        </div>
-
->>>>>>> 18b7d9792df790538494a4dddee1a7b3d1aa070c
-
 
 
         <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
@@ -138,9 +102,6 @@
                                     </div>
                                     <% } %>
                             </div>
-
-
-
                 </div>
 
     </div>

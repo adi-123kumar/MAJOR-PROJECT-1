@@ -20,13 +20,26 @@
             <p id="price"><i class="fa-solid fa-tag"></i>&nbsp;&nbsp;&#8377;<%=listing.price.toLocaleString("en-IN") %>
             </p>
             <p id="mobileNo"><i class="fa-solid fa-phone"></i> &nbsp;+91 9142756328 </p>
-             <!--adding buttons  -->
-                <button class="btn btn-dark add-btn mt-3"><a href="/listings/<%=listing._id%>/edit">Edit</a></button>
-                <button class="btn btn-dark add-btn mt-3"><a href="/listings/<%=listing._id%>/delete">Delete</a></button>     
-</div>
+            <button class="btn-edit">
+                <a class="nav-link " aria-current="page" href="/listings/<%=listing._id%>/edit"><b>Edit</b></a>
+                </button>
+            <button class="btn-delete">
+                <a class="nav-link " aria-current="page" href="/listings/<%=listing._id%>/delete"><b>Delete</b></a>
+                </button>
+        </div>
 
         <hr id="after-main-box">
     </div>
+
+    <!-- <div class="middle-part">
+        <div class="middle-description">
+
+        </div>
+        <div class="price-box">
+           
+        </div>
+    </div> -->
+   
 
 
 

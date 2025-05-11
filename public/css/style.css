@@ -200,6 +200,9 @@ body{
 .btn-login{
 margin-right: 2em;
 }
+.btn-logout{
+margin-right: 2em;
+}
 .logo{
     margin-left: 2em;
     font-size: 2em;

@@ -17,6 +17,19 @@ router.route("/")
 // .post(isLoggedIn,validateListing, wrapAsync(listingController.createListings));  // create route]
 .post(isLoggedIn,upload.single("listing[image]"),validateListing,wrapAsync(listingController.createListings));
 
+// editing started from here
+
+
+router.get('/search', async (req, res) => {
+  const { maxPrice } = req.query;
+  try {
+    const listings = await Listing.find({ price: { $lte: maxPrice } });
+    res.render('listings/index', { allListings: listings });
+  } catch (err) {
+    console.log("Search error:", err);
+    res.redirect('/listings');
+  }
+});
 
   // new route
   router.get("/new", isLoggedIn,listingController.renderNewForm)
@@ -28,7 +41,11 @@ router.route("/:id")
 
 
 //   edit route
-router.get("/:id/edit", isLoggedIn,isOwner,wrapAsync(listingController.renderEditForm));
-// Delete route
-  router.get("/:id/delete", isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
+  router.get("/:id/edit", isLoggedIn,isOwner,wrapAsync(listingController.renderEditForm));
+router.get("/:id/delete", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
+  
+
+
+
+
   module.exports = router;

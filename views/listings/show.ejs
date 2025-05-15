@@ -21,8 +21,8 @@
       </p>
       <div class="btn-group mt-2 mt-sm-0">
    <% if (currUser && currUser._id.toString() === listing.owner._id.toString()) { %>
-  <a href="/listings/<%= listing._id %>/edit" class="btn custom-btn mt-4">Edit</a>
-  <a href="/listings/<%= listing._id %>/delete" class="btn custom-btn delete-btn mt-4">Delete</a>
+  <a href="/listings/<%= listing._id %>/edit" class="btn custom-btn mt-4 ">Edit</a>
+  <a href="/listings/<%= listing._id %>/delete" class="btn custom-btn delete-btn mt-4 ml-3">Delete</a>
 <% } %>
 
       </div>

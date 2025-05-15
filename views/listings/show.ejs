@@ -1,144 +1,195 @@
 <% layout("/layouts/boilerplate") %>
 
-  <style>
-    /* Background and font */
-    body {
-      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      margin: 0;
-      padding: 2rem 1rem;
-    }
+<!-- Listing Info -->
+<div class="main-box fancy-bg">
+  <div class="left-box fade-in-left">
+    <img src="<%= listing.image.url %>" alt="Listing Image" id="listing-img">
+  </div>
 
-    /* Filters container */
-    #filters {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
+  <div class="right-box fade-in-right">
+    <h1 id="title"><%= listing.title %></h1>
+    <p id="description"><%= listing.description %></p>
+    <p id="owner">Owned By: @<%= listing.owner.username %></p>
+    <p id="location">
+      <i class="fa-solid fa-globe"></i> <%= listing.country %>,
+      <i class="fa-solid fa-city"></i> <%= listing.location %>
+    </p>
 
-    /* Individual filter styling */
-    .filter {
-      background-color: #ffffffdd;
-      /* translucent white */
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      text-align: center;
-      opacity: 0.75;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-      user-select: none;
-      width: 100px;
-    }
-
-    /* Hover effect on filters */
-    .filter:hover {
-      opacity: 1;
-      transform: translateY(-6px);
-      box-shadow: 0 8px 14px rgba(0, 0, 0, 0.15);
-    }
-
-    .filter p {
-      font-size: 0.85rem;
-      margin-top: 0.4rem;
-      font-weight: 600;
-      color: #1a73e8;
-    }
-
-    /* Icon style */
-    .filter i {
-      font-size: 1.8rem;
-      color: #1a73e8;
-      transition: color 0.3s ease;
-    }
-
-    .filter:hover i {
-      color: #0b47a1;
-    }
-
-    /* Listings grid */
-    .row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      padding-bottom: 3rem;
-    }
-
-    /* Card styling */
-    .card {
-      position: relative;
-      background-color: #fff;
-      border-radius: 16px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    /* Card hover effect */
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
-    }
-
-    .card img {
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      object-fit: cover;
-      height: 20rem;
-      width: 100%;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Card body */
-    .card-body {
-      padding: 1rem 1.3rem;
-      color: #222;
-    }
-
-    .card-text {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    /* Link styling */
-    a.listing-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    a.listing-link:hover {
-      text-decoration: none;
-    }
-  </style>
-
-  <body>
-
-    <div class="row">
-      <% for(let listing of allListings) { %>
-        <a href="/listings/<%= listing._id %>" class="listing-link">
-          <div class="card">
-            <img src="<%= listing.image.url %>" alt="listing_image" />
-            <div class="card-body">
-              <p class="card-text">
-                <b>
-                  <%= listing.title %>
-                </b><br />
-                <% if(listing.price) { %>
-                  &#8377;<%= listing.price.toLocaleString("en-IN") %> /night
-                    <% } %>
-              </p>
-            </div>
-          </div>
-        </a>
-        <% } %>
+    <div class="d-flex align-items-center gap-3 flex-wrap mt-2 justify-content-between">
+      <p id="mobileNo" class="mb-0">
+        <i class="fa-solid fa-phone"></i> +91 9142756328
+      </p>
+      <div class="btn-group mt-2 mt-sm-0">
+        <a href="/listings/<%= listing._id %>/edit" class="btn custom-btn me-2">Edit</a>
+        <a href="/listings/<%= listing._id %>/delete" class="btn custom-btn delete-btn">Delete</a>
+      </div>
     </div>
-  </body>
+  </div>
+</div>
+
+<!-- Review Section -->
+<div class="second-part col-12 fade-in-up">
+  <div class="col-8 mb-3 reviews-section-enhanced">
+    <h4>Leave a Review</h4>
+
+    <% if (currUser) { %>
+    <form action="/listings/<%= listing.id %>/reviews" method="post" class="needs-validation new-review-form" novalidate>
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating</label>
+        <fieldset class="starability-slot">
+          <input type="radio" id="no-rate" name="review[rating]" value="1" checked />
+          <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comments</label>
+        <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+        <div class="invalid-feedback">Please add some comment first.</div>
+      </div>
+
+      <button class="btn btn-outline-dark mb-2">Submit</button>
+    </form>
+    <% } %>
+
+    <p><b>Reviews</b></p>
+    <div class="row">
+      <% for (review of listing.reviews) { %>
+      <div class="review-card slide-in-bottom">
+        <div class="review-header">
+          <div class="review-username">@<%= review.author.username %></div>
+          <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+        </div>
+        <div class="review-body">
+          <%= review.comment %>
+        </div>
+
+        <% if (currUser && review.author && currUser._id.toString() === review.author._id.toString()) { %>
+        <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST"
+          class="mt-2 review-actions">
+          <button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+        <% } %>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<!-- CSS Styling -->
+<style>
+  .custom-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .custom-btn:hover {
+    background-color: #43a047;
+  }
+
+  .delete-btn {
+    background-color: #e53935;
+  }
+
+  .delete-btn:hover {
+    background-color: #c62828;
+  }
+
+  .reviews-section-enhanced {
+    background: linear-gradient(to right, #fdfbfb, #ebedee);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    animation: fadeInReview 0.8s ease forwards;
+  }
+
+  @keyframes fadeInReview {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .review-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 5px solid #48b461;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.05rem;
+    color: #222;
+  }
+
+  .review-body {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  .review-actions button {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .new-review-form textarea:focus {
+    border-color: #48b461;
+    box-shadow: 0 0 4px rgba(72, 180, 97, 0.5);
+  }
+
+  .starability-slot {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+  .slide-in-bottom {
+    animation: slideInBottom 0.7s ease forwards;
+  }
+
+  @keyframes slideInBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

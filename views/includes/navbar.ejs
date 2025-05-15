@@ -1,30 +1,171 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<style>
+  /* Navbar gradient */
+  nav.navbar {
+    background: linear-gradient(90deg, #0D47A1, #1976D2);
+    padding: 1rem 2rem;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.6);
+    opacity: 0;
+    animation: fadeInNav 1s forwards;
+    z-index: 1000;
+  }
+
+  @keyframes fadeInNav {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Logo icon */
+  .logo {
+    font-size: 1.5rem;
+    color: #F5F5F5;
+  }
+
+  .explore {
+    font-weight: 600;
+    color: #F5F5F5;
+    transition: color 0.3s ease;
+  }
+
+  .explore:hover {
+    color: #1DE9B6;
+  }
+
+  /* Search input */
+  .search-input {
+    transition: all 0.4s ease;
+    width: 180px;
+    border: 1.5px solid #FFFFFF55;
+    border-radius: 5px;
+    padding: 6px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #F5F5F5;
+  }
+
+  .search-input::placeholder {
+    color: #D1D1D1;
+  }
+
+  .search-input:focus {
+    width: 270px;
+    border-color: #1DE9B6;
+    box-shadow: 0 0 8px #1DE9B6;
+    outline: none;
+    background-color: #163f7a;
+    color: #E0F7FA;
+  }
+
+  /* Search button */
+  .search-btn {
+    transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease;
+    border-radius: 5px;
+    border: 2px solid #1DE9B6;
+    background-color: transparent;
+    color: #1DE9B6;
+  }
+
+  .search-btn:hover {
+    background-color: #26FFC9;
+    color: #0D47A1;
+    border-color: #26FFC9;
+    transform: scale(1.05);
+  }
+
+  /* Align search form */
+  .navbar .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  form.d-flex.mx-auto {
+    max-width: 320px;
+    width: 100%;
+  }
+
+  /* Nav-link buttons */
+  .nav-link {
+    color: #F5F5F5 !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #1DE9B6 !important;
+  }
+
+  .btn-nav {
+    background-color: transparent;
+    border: 2px solid #1DE9B6;
+    border-radius: 8px;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-nav:hover {
+    background-color: #1DE9B6;
+  }
+
+  .btn-nav:hover .nav-link {
+    color: #0D47A1 !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navbar .container-fluid {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    form.d-flex.mx-auto {
+      justify-content: center;
+    }
+
+    .navbar-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-md border-bottom sticky-top mb-5">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass logo"></i></a>
-    <!-- <span class="navbar-toggler-icon"></span> -->
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+    <!-- Left side: Logo & Explore -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass logo"></i></a>
+      <div class="navbar-nav ms-3">
         <a class="nav-link explore" href="/listings">Explore</a>
       </div>
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link new-list" href="/listings/new">Airbnb Your home</a>
+    </div>
 
-        <% if(!currUser){ %>
-          <button class="btn-nav btn-signup">
-          <a class="nav-link " aria-current="page" href="/signup"><b>Sign up</b></a>
+    <!-- Centered Search Form -->
+    <form class="d-flex mx-auto" action="/listings/search" method="GET">
+      <input class="form-control me-2 search-input" type="number" name="maxPrice" placeholder="Max Price (₹)" aria-label="Search" required />
+      <button class="btn btn-outline-success search-btn" type="submit">Search</button>
+    </form>
+
+    <!-- Right side: User actions -->
+    <div class="navbar-nav d-flex align-items-center">
+      <a class="nav-link new-list me-3" href="/listings/new">Airbnb Your home</a>
+
+      <% if (!currUser) { %>
+        <button class="btn-nav btn-signup me-2">
+          <a class="nav-link" href="/signup"><b>Sign up</b></a>
         </button>
         <button class="btn-nav btn-login">
           <a class="nav-link" href="/login"><b>Log in</b></a>
         </button>
-          <% }%>
-            <% if(currUser){%>
-              <button class="btn-nav btn-logout">
-                <a class="nav-link" href="/logout"><b>Log Out</b></a>
-                </button>
+      <% } %>
 
-              <% }%>
-      </div>
+      <% if (currUser) { %>
+        <button class="btn-nav btn-logout">
+          <a class="nav-link" href="/logout"><b>Log Out</b></a>
+        </button>
+      <% } %>
     </div>
   </div>
 </nav>

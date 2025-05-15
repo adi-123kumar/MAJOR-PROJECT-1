@@ -203,6 +203,7 @@ margin-right: 2em;
 .btn-logout{
 margin-right: 2em;
 }
+
 .logo{
     margin-left: 2em;
     font-size: 2em;
@@ -238,3 +239,167 @@ margin-right: 2em;
      border: 2px solid black;
 }
 
+/* adding new functonlality */
+
+/* Background */
+.fancy-bg {
+    background: linear-gradient(135deg, #f9f9f9, #e0f7fa, #fce4ec);
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    padding: 1.5rem;
+    max-width: 95vw;
+}
+
+/* Animation Classes */
+.fade-in-left {
+    animation: fadeInLeft 1s ease-out;
+}
+
+.fade-in-right {
+    animation: fadeInRight 1s ease-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 1s ease-out;
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+.slide-in-bottom {
+    animation: slideInBottom 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes slideInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button Enhancements */
+.btn-edit,
+.btn-delete {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+    background: linear-gradient(to right, #43e97b, #38f9d7);
+    transform: scale(1.05);
+}
+
+/* Responsive Fixes (reuse previous if needed) */
+@media (max-width: 768px) {
+    .main-box {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .left-box,
+    .right-box {
+        width: 100%;
+        text-align: center;
+        padding: 1em;
+    }
+
+    .left-box img {
+        width: 100%;
+        height: auto;
+    }
+
+    .btns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        width: 80%;
+        margin: 0.5em 0;
+    }
+}
+
+/* adding night mode things */
+body {
+  background-color: var(--nav-bg-start);
+  color: var(--nav-text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Example for other page elements */
+h1, h2, h3, p {
+  color: var(--nav-text-color);
+}
+
+/* Links */
+a {
+  color: var(--nav-accent-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--nav-accent-hover);
+}
